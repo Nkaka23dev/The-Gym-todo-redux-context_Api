@@ -1,15 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Input from "./components/Input";
+import Todo from "./components/Todo";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className=''>
-      <h1 className='text-red-500 text-3xl'>Todo App with Redux and Context Api</h1>
-    </div>
-  )
+    <section className="max-w-3xl mx-auto">
+      <div className="mt-20">
+        <h1 className="text-6xl font-extrabold text-gray-400 text-center">
+          Todo
+        </h1>
+       <Input/>
+       <Todo/>
+      </div>
+    </section>
+  );
 }
 
-export default App
+export default App;
