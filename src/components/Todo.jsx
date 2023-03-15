@@ -1,11 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import useGlobalContext from "../hooks/useGlobaContext";
 import Buttons from "./Buttons";
-import { changeCheckedTask } from "./utils/store";
 
 export default function Todo() {
-  const tasks = useSelector((state) => state.todo.tasks);
-  const dispatch = useDispatch();
+  const { tasks, changeCheckedTask } = useGlobalContext()
+  console.log([tasks])
   return (
     <div className=" space-y-5 mt-6 px-5">
       {tasks.map((task, idx) => {
@@ -13,7 +12,7 @@ export default function Todo() {
           <div key={idx} className="flex justify-between items-center gap-10">
             <div className="flex ">
               <input
-                onChange={() => dispatch(changeCheckedTask(task))}
+                onChange={() => changeCheckedTask(task)}
                 type="checkbox"
                 className={`p-2  cursor-pointer`}
                 checked={task.checkedTask}

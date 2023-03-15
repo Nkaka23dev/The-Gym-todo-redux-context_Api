@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
-import { useDispatch} from "react-redux";
-import { changeTaskName, changeTaskToEdit, deleteTask } from "./utils/store";
+import { TodoContext } from "./utils/TodoContext";
 
 export default function Buttons({ taskId, task }) {
-  const dispatch = useDispatch();
- 
+  const { changeTaskToEdit, changeTaskName, deleteTask } =
+    useContext(TodoContext);
   const handleEdit = () => {
-    dispatch(changeTaskToEdit(task));
-    dispatch(changeTaskName(task.name))
-  }
+    changeTaskToEdit(task);
+    changeTaskName(task.name);
+  };
   const handleDelete = () => {
-    dispatch(deleteTask(taskId));
+    deleteTask(taskId);
   };
   return (
     <div className="flex gap-2">
-      <button onClick={handleEdit} className="bg-blue-100 p-1 hover:bg-blue-200 rounded-full ">
+      <button
+        onClick={handleEdit}
+        className="bg-blue-100 p-1 hover:bg-blue-200 rounded-full "
+      >
         <AiTwotoneEdit className="text-blue-600 text-xl" />
       </button>
       <button

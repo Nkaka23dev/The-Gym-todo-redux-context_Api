@@ -1,7 +1,6 @@
-import { Provider } from "react-redux";
 import Input from "./components/Input";
 import Todo from "./components/Todo";
-import { store } from "./components/utils/store";
+import { TodoProvider } from "./components/utils/TodoContext";
 
 function App() {
   return (
@@ -10,10 +9,10 @@ function App() {
         <h1 className="text-6xl font-extrabold text-gray-400 text-center">
           Todo
         </h1>
-        <Provider store={store}>
+        <TodoProvider>
           <Input />
           <Todo />
-        </Provider>
+        </TodoProvider>
       </div>
     </section>
   );

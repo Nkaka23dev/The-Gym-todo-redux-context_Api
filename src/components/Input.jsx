@@ -1,45 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addTask,
-  changeTaskName,
-  changeTaskToEdit,
-  editTask,
-} from "./utils/store";
+import { TodoContext } from "./utils/TodoContext";
 
 export default function Input() {
-  const dispatch = useDispatch();
+  const {
+    tasks,
+    taskName,
+    taskToedit,
+    changeTaskName,
+    changeTaskToEdit,
+    editTask,
+    addTask,
+  } = useContext(TodoContext);
   const [errormessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessmessage] = useState("");
-
-  const tasks = useSelector((state) => state.todo.tasks);
-  const taskName = useSelector((state) => state.todo.taskName);
-  const taskToedit = useSelector((state) => state.todo.TaskToEdit);
 
   const handleAddTask = (e) => {
     e.preventDefault();
     if (taskName) {
       if (taskToedit.name) {
-        dispatch(
-          editTask({
-            id: taskToedit.id,
-            name: taskName,
-            checkedTask: false,
-          })
-        );
-        dispatch(changeTaskName(""));
-        dispatch(changeTaskToEdit({}));
+        editTask({
+          id: taskToedit.id,
+          name: taskName,
+          checkedTask: false,
+        });
+        changeTaskName("");
+        changeTaskToEdit({});
       } else {
-        dispatch(
-          addTask({
-            id: tasks.length === 0 ? 1 : tasks[tasks.length - 1].id + 1,
-            name: taskName,
-            checkedTask: false,
-          })
-        );
+        addTask({
+          id: tasks.length === 0 ? 1 : tasks[tasks.length - 1].id + 1,
+          name: taskName,
+          checkedTask: false,
+        });
         setSuccessmessage("Task added Successfull");
-        dispatch(changeTaskName(""));
+        changeTaskName("");
         console.log(taskToedit);
       }
     } else {
@@ -71,7 +65,7 @@ export default function Input() {
           type="text"
           value={taskName}
           placeholder="Enter a todo..."
-          onChange={(e) => dispatch(changeTaskName(e.target.value))}
+          onChange={(e) => changeTaskName(e.target.value)}
           className="w-full py-4 px-5 border rounded-full  border-gray-700 mt-7"
         />
         <button className="absolute p-2 rounded-full top-10 bg-green-700  hover:bg-green-800 right-2">
