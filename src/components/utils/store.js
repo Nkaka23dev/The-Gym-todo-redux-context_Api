@@ -31,7 +31,14 @@ const useSlice = createSlice({
             );
             state.tasks = editedTasks;
             localStorage.setItem("tasks", JSON.stringify(editedTasks));
-        }
+        },
+        changeCheckedTask: (state, action) => {
+            const { id } = action.payload;
+            const task = state.tasks.find((task) => task.id === id);
+            if (task) {
+                task.checkedTask = true;
+            }
+        },
     }
 })
 export const {
@@ -39,7 +46,8 @@ export const {
     deleteTask,
     changeTaskName,
     changeTaskToEdit,
-    editTask
+    editTask,
+    changeCheckedTask
 } = useSlice.actions;
 
 export const store = configureStore({

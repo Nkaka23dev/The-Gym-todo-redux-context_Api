@@ -12,7 +12,7 @@ export default function Input() {
   const dispatch = useDispatch();
   const [errormessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessmessage] = useState("");
-  
+
   const tasks = useSelector((state) => state.todo.tasks);
   const taskName = useSelector((state) => state.todo.taskName);
   const taskToedit = useSelector((state) => state.todo.TaskToEdit);
@@ -25,20 +25,22 @@ export default function Input() {
           editTask({
             id: taskToedit.id,
             name: taskName,
+            checkedTask: false,
           })
         );
-        dispatch(changeTaskName(""))
+        dispatch(changeTaskName(""));
         dispatch(changeTaskToEdit({}));
       } else {
         dispatch(
           addTask({
             id: tasks.length === 0 ? 1 : tasks[tasks.length - 1].id + 1,
             name: taskName,
+            checkedTask: false,
           })
         );
         setSuccessmessage("Task added Successfull");
-        dispatch(changeTaskName(""))
-        console.log(taskToedit)
+        dispatch(changeTaskName(""));
+        console.log(taskToedit);
       }
     } else {
       setErrorMessage("No Task Provided");
