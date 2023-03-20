@@ -3,19 +3,19 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addTask,
-  changeTaskName,
   changeTaskToEdit,
   editTask,
-} from "./utils/store";
+} from "../services/taskSlice";
+import {changeTaskName} from "../services/taskNameSlice"
 
 export default function Input() {
   const dispatch = useDispatch();
   const [errormessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessmessage] = useState("");
 
-  const tasks = useSelector((state) => state.todo.tasks);
-  const taskName = useSelector((state) => state.todo.taskName);
-  const taskToedit = useSelector((state) => state.todo.TaskToEdit);
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const taskName = useSelector((state) => state.taskName.taskName);
+  const taskToedit = useSelector((state) => state.tasks.TaskToEdit);
 
   const handleAddTask = (e) => {
     e.preventDefault();

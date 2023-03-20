@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { changeCheckedTask } from "../services/taskSlice";
 import Buttons from "./Buttons";
-import { changeCheckedTask } from "./utils/store";
+// import { changeCheckedTask } from "./utils/store";
 
 export default function Todo() {
-  const tasks = useSelector((state) => state.todo.tasks);
+  const tasks = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
   return (
     <div className=" space-y-5 mt-6 px-5">

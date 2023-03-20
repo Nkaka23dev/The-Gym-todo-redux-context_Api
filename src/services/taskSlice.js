@@ -1,21 +1,18 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 const initialState = {
     tasks: savedTasks,
-    taskName: "",
-    TaskToEdit: {}
-}
-const useSlice = createSlice({
-    name: "todo",
+    TaskToEdit: {},
+};
+
+const tasksSlice = createSlice({
+    name: 'tasks',
     initialState,
     reducers: {
         addTask: (state, action) => {
             state.tasks.push(action.payload);
-        },
-        changeTaskName: (state, action) => {
-            state.taskName = action.payload;
         },
         changeTaskToEdit: (state, action) => {
             state.TaskToEdit = action.payload;
@@ -40,21 +37,13 @@ const useSlice = createSlice({
             }
         },
     }
-})
+});
+
 export const {
     addTask,
     deleteTask,
-    changeTaskName,
     changeTaskToEdit,
     editTask,
-    changeCheckedTask
-} = useSlice.actions;
+    changeCheckedTask } = tasksSlice.actions;
 
-export const store = configureStore({
-    reducer: {
-        todo: useSlice.reducer
-    }
-})
-store.subscribe(() => {
-    localStorage.setItem('tasks', JSON.stringify(store.getState().todo.tasks));
-});
+export default tasksSlice.reducer;

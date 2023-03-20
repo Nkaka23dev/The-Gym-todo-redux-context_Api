@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import Input from "./components/Input";
 import Todo from "./components/Todo";
-import { store } from "./components/utils/store";
+import store from "./services/store";
 
 function App() {
   return (

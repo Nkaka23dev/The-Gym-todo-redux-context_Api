@@ -1,7 +1,8 @@
 import React from "react";
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
 import { useDispatch} from "react-redux";
-import { changeTaskName, changeTaskToEdit, deleteTask } from "./utils/store";
+import {changeTaskToEdit, deleteTask } from "../services/taskSlice";
+import {changeTaskName} from "../services/taskNameSlice"
 
 export default function Buttons({ taskId, task }) {
   const dispatch = useDispatch();
